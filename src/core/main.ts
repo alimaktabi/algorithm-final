@@ -61,3 +61,7 @@ const MainAlgorithm = (algorithm: Algorithm, r: number) => {
 }
 
 export default MainAlgorithm
+
+//todo:
+//  PATH GREEDY CHOICE WHEN EQUAL PATHS
+//  VISUALIZES
