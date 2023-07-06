@@ -15,11 +15,17 @@ export const POST = async (req: NextRequest) => {
 
   const content = buffer.toString()
 
+  const start = performance.now()
   const algorithm = new Algorithm()
 
   algorithm.prepare(content)
 
-  algorithm.run()
+  const res = algorithm.run()
 
-  return NextResponse.json({ status: "Ok" })
+  return NextResponse.json({
+    status: "Ok",
+    res,
+    nodes: algorithm.nodes,
+    timeTaken: performance.now() - start,
+  })
 }

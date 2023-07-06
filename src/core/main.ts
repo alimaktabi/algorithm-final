@@ -1,4 +1,3 @@
-import { PathNode } from "@/types"
 import { Algorithm } from "."
 
 export const compareWithPreviousNode = (
@@ -53,7 +52,7 @@ const MainAlgorithm = (algorithm: Algorithm, r: number) => {
   }
 
   return {
-    visitedNodes: visitedNodes.slice(1),
+    visitedNodes: visitedNodes,
     profit,
     nodesVisitedCount: visitedNodes.length - 1,
     totalCost,

@@ -3,15 +3,18 @@
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import ResultPage from "./result/page"
 
 export default function Home() {
   const { register, handleSubmit } = useForm()
 
   const [loading, setLoading] = useState(false)
 
+  const [data, setData] = useState<any>({})
+
   const onSubmit = (e: any) => {
     setLoading(true)
-
+    setData({})
     const formData = new FormData()
 
     formData.append("file", e.file[0])
@@ -23,6 +26,7 @@ export default function Home() {
         },
       })
       .then((res) => {
+        setData(res.data)
         console.log(res.data)
         // setAlgorithm(data.method)
         // setResult(res.data)
@@ -57,6 +61,23 @@ export default function Home() {
                 </button>
               </div>
             </form>
+          </div>
+          <div className="mt-5">
+            <h3 className="text-3xl font-semibold">Algorithm Result:</h3>
+
+            <p className="mt-5">
+              Time taken to run the algorithm: {data.timeTaken}
+            </p>
+
+            <p className="mt-5">Nodes visited: {data.res.nodesVisitedCount}</p>
+
+            <p className="mt-5">Total Cost: {data.res.totalCost}</p>
+            <p className="mt-5">Profit: {data.res.profit}</p>
+          </div>
+          <div className="mt-10">
+            {data.nodes && (
+              <ResultPage res={data.res.visitedNodes} locations={data.nodes} />
+            )}
           </div>
         </div>
       </div>

@@ -39,6 +39,8 @@ export class Algorithm {
     )
 
     console.log(res)
+
+    return res
   }
 
   protected fillDistancesMatrix() {
