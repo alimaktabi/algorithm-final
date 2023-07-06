@@ -3,7 +3,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import ResultPage from "./result/page"
+import ResultPage from "../components/result/page"
 
 export default function Home() {
   const { register, handleSubmit } = useForm()
@@ -62,23 +62,30 @@ export default function Home() {
               </div>
             </form>
           </div>
-          <div className="mt-5">
-            <h3 className="text-3xl font-semibold">Algorithm Result:</h3>
+          {data.nodes && (
+            <>
+              <div className="mt-5">
+                <h3 className="text-3xl font-semibold">Algorithm Result:</h3>
 
-            <p className="mt-5">
-              Time taken to run the algorithm: {data.timeTaken}
-            </p>
+                <p className="mt-5">
+                  Time taken to run the algorithm: {data.timeTaken}
+                </p>
 
-            <p className="mt-5">Nodes visited: {data.res.nodesVisitedCount}</p>
+                <p className="mt-5">
+                  Nodes visited: {data.res.nodesVisitedCount}
+                </p>
 
-            <p className="mt-5">Total Cost: {data.res.totalCost}</p>
-            <p className="mt-5">Profit: {data.res.profit}</p>
-          </div>
-          <div className="mt-10">
-            {data.nodes && (
-              <ResultPage res={data.res.visitedNodes} locations={data.nodes} />
-            )}
-          </div>
+                <p className="mt-5">Total Cost: {data.res.totalCost}</p>
+                <p className="mt-5">Profit: {data.res.profit}</p>
+              </div>
+              <div className="mt-10">
+                <ResultPage
+                  res={data.res.visitedNodes}
+                  locations={data.nodes}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </main>
